@@ -1,0 +1,48 @@
+数据库名称：comments
+数据表名称：users,contents
+
+创建数据库users的指令：
+CREATE TABLE users (
+  user_id int(11) NOT NULL AUTO_INCREMENT,
+  account varchar(255) NOT NULL,
+  username varchar(255) NOT NULL,
+  password varchar(255) NOT NULL,
+  sex varchar(255) NOT NULL,
+  email varchar(255) NOT NULL,
+  submission_time datetime DEFAULT NULL,
+  PRIMARY KEY (user_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+创建数据库contents的指令：
+ CREATE TABLE contents (
+  number int(10) unsigned NOT NULL AUTO_INCREMENT,
+  username varchar(255) NOT NULL,
+  email varchar(255) NOT NULL,
+  content text NOT NULL,
+  toggle varchar(255) NOT NULL,
+  submission_time datetime DEFAULT NULL,
+  PRIMARY KEY (number)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+创建数据库replies的指令：
+CREATE TABLE replies (
+  reply_id int(11) NOT NULL AUTO_INCREMENT,
+  parent_id int(11) NOT NULL,
+  sub_username varchar(255) NOT NULL,
+  to_username varchar(255) NOT NULL,
+  reply_content varchar(255) NOT NULL,
+  reply_time datetime DEFAULT NULL,
+  PRIMARY KEY (reply_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+注：
+1、在登录页面的密码下面可以新添<input type="checkbox" value="remember"><small>记住我</small>，通过创建remember函数检测checkbox是否选中并返回值
+			function remember() {
+				if ($("#remember").prop("checked")) {
+					return 1;
+				}
+				else {
+					return 0;
+				}
+			}
+ajax发送此值：remember:remember()，在PHP程序中通过判断此值决定是否创建cookie。
